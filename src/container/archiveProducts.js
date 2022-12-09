@@ -1,10 +1,14 @@
 import * as fs from 'fs';
 
-export class ContenedorProductos {
+class archiveProducts {
+
+    constructor(route) {
+        this.route = route;
+    }
 
     async save(obj){
         try{
-            const file = await fs.promises.readFile(`./src/data/models/products.txt`, 'utf-8');
+            const file = await fs.promises.readFile(this.route, 'utf-8');
             const dataFileParse = JSON.parse(file);
             const id = dataFileParse.length;
                         
@@ -14,7 +18,7 @@ export class ContenedorProductos {
             });
             
             dataFileParse.push(...obj)
-            await fs.promises.writeFile(`./src/data/models/products.txt`, JSON.stringify ([...dataFileParse]))
+            await fs.promises.writeFile(this.route, JSON.stringify ([...dataFileParse]))
 
             return dataFileParse;
         }
@@ -25,7 +29,7 @@ export class ContenedorProductos {
 
     async getByID(id){
         try{
-            const file = await fs.promises.readFile(`./src/data/models/products.txt`, 'utf-8');
+            const file = await fs.promises.readFile(this.route, 'utf-8');
             const fileParse = JSON.parse(file);
             const element = fileParse.find(product => product.id == id);
 
@@ -43,7 +47,7 @@ export class ContenedorProductos {
 
     async getAll(){
         try{
-            const file = await fs.promises.readFile(`./src/data/models/products.txt`, 'utf-8');
+            const file = await fs.promises.readFile(this.route, 'utf-8');
             const fileParse = JSON.parse(file);
 
             return fileParse
@@ -96,3 +100,5 @@ export class ContenedorProductos {
     }
 
 }
+
+export default archiveProducts;

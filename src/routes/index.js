@@ -1,16 +1,14 @@
 import express from "express";
 import * as fs from 'fs';
-import {ContenedorProductos} from "../data/containerProducts.js";
-import {containerCart} from "../data/containerCart.js";
-
+import { ProductDAO, CartDAO } from "../daos/index.js";
 
 const router = express.Router();
 const admin = true;
-const Products = new ContenedorProductos();
-const Cart = new containerCart();
 
-router.get('/products', (_req, res) => {
-    Products.getAll()
+//Products routes
+
+router.get('/products', async (_req, res) => {
+    ProductDAO.getAll()
     .then(result => {
         res.status(200).json({result})
     })
@@ -19,7 +17,7 @@ router.get('/products', (_req, res) => {
 
 router.get('/products/by/id', (req, res) => {
 
-    Products.getByID(req.body.id)
+    ProductDAO.getByID(req.body.id)
     .then(result => {
         if (result == null){
             res.status(404).json({ error : 'producto no encontrado' })
@@ -33,7 +31,7 @@ router.get('/products/by/id', (req, res) => {
 
 router.post('/products/add', async (req, res) => {
     if(admin){
-        Products.save([req.body])
+        ProductDAO.save([req.body])
         .then(result => {
             res.status(200).json({result})
         })
@@ -50,7 +48,7 @@ router.post('/products/add', async (req, res) => {
 
 router.put('/products/update', (req, res) => {
     if(admin){
-        Products.updateProduct(req.body)
+        ProductDAO.updateProduct(req.body)
         .then(result => {
             res.status(200).json({result})
         })
@@ -67,7 +65,7 @@ router.put('/products/update', (req, res) => {
 
 router.delete('/products/delete', (req, res) => {
     if(admin){
-        Products.deleteById(req.body.id)
+        ProductDAO.deleteById(req.body.id)
         .then(result => {
             res.status(200).json({result})
         })
@@ -82,9 +80,10 @@ router.delete('/products/delete', (req, res) => {
     }
 });
 
+//Cart routes
 
 router.get('/cart', (_req, res) => {
-    Cart.getAll()
+    CartDAO.getAll()
     .then(result => {
         res.status(200).json({result})
     })
@@ -92,7 +91,7 @@ router.get('/cart', (_req, res) => {
 });
 
 router.post('/cart/create', (_req, res) => {
-    Cart.createCart()
+    CartDAO.createCart()
     .then(result => {
         res.status(200).json({result})
     })
@@ -100,7 +99,7 @@ router.post('/cart/create', (_req, res) => {
 });
 
 router.post('/cart/add', (req, res) => {
-    Cart.addCartproduct(req.body)
+    CartDAO.addCartproduct(req.body)
     .then(result => {
         res.status(200).json({result})
     })
@@ -108,7 +107,7 @@ router.post('/cart/add', (req, res) => {
 });
 
 router.delete('/cart/deleteProduct', (req, res) => {
-    Cart.delteProduct(req.body)
+    CartDAO.delteProduct(req.body)
     .then(result => {
         res.status(200).json({result})
     })
@@ -116,13 +115,12 @@ router.delete('/cart/deleteProduct', (req, res) => {
 });
 
 router.delete('/cart/delete', (req, res) => {
-    Cart.delteCart(req.body)
+    CartDAO.delteCart(req.body)
     .then(result => {
         res.status(200).json({result})
     })
     .catch(error => res.status(500).json(error))
 });
-
 
 
 export default router;
