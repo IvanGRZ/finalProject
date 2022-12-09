@@ -112,14 +112,45 @@ class firebaseCart {
         }
     }
 
-    /*
     async delteProduct(obj){
         try{
-            const cartfile = await fs.promises.readFile(`./src/data/models/cart.txt`, 'utf-8');
-            const cartFileParse = JSON.parse(cartfile);
+            const file = this.collection.doc(obj.cartId.toString());
+            const cart = await file.get();
+            const newData = []
 
-            const cart = cartFileParse.find(product => product.id == obj.cartId);
-            const product = cart.products.find(product => product.id == obj.productId);
+            if (!cart.exists) {
+                console.log('No such document!');
+              } else {
+                const itemProduct = cart.data().Products.idProducto == obj.productId ;
+                 if(itemProduct){
+                    if(cart.data().Products.Cantidad && cart.data().Products.Cantidad !== 0){
+                        newData.push({
+                            Products:{
+                                idProducto: obj.productId,
+                                Cantidad: cart.data().Products.Cantidad - 1
+                            },
+                            timestamp: new Date()
+                        }) 
+                     }
+                     else{
+                        newData.push({
+                            Products:{},
+                            timestamp: new Date()
+                        })                  
+                    }
+                }
+                else{
+                    return {error: "No existe ese producto en este carrito"}
+                }
+
+
+              }
+
+              const addCart = await this.collection.doc(obj.cartId.toString()).update(newData[0]);
+    
+              return addCart; 
+
+/*
 
             if (product != undefined){
                 if(product.cantidad){
@@ -139,12 +170,14 @@ class firebaseCart {
             await fs.promises.writeFile(`./src/data/models/cart.txt`, JSON.stringify ([...cartFileParse]))
 
             return cartFileParse;
+            */
+
         }
         catch(error){
             console.log(error)
         }
     }
-
+    /*
     async delteCart(obj){
         try{
             const file = await fs.promises.readFile(`./src/data/models/cart.txt`, 'utf-8');
