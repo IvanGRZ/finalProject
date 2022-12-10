@@ -149,50 +149,21 @@ class firebaseCart {
               const addCart = await this.collection.doc(obj.cartId.toString()).update(newData[0]);
     
               return addCart; 
-
-/*
-
-            if (product != undefined){
-                if(product.cantidad){
-                    product.cantidad = product.cantidad - 1
-                } 
-                else{
-                    const index = cart.products.findIndex((num) => num.id === obj.productId);
-                    cart.products.splice(index, 1);
-                }
-            }
-
-
-            const index = cartFileParse.findIndex((num) => num.id === obj.cartId);
-            cartFileParse.splice(index, 1);
-            cartFileParse.push(cart);
-
-            await fs.promises.writeFile(`./src/data/models/cart.txt`, JSON.stringify ([...cartFileParse]))
-
-            return cartFileParse;
-            */
-
         }
         catch(error){
             console.log(error)
         }
     }
-    /*
+
     async delteCart(obj){
         try{
-            const file = await fs.promises.readFile(`./src/data/models/cart.txt`, 'utf-8');
-            const fileParse = JSON.parse(file);
-
-            const filterDelete = fileParse.filter(product => product.id !== obj.id)
-            await fs.promises.writeFile(`./src/data/models/cart.txt`, JSON.stringify(filterDelete))
-            
-            return filterDelete;
+            const deleteCart = await this.collection.doc(obj.id.toString()).delete();
+            return deleteCart;
         }
         catch(error){
             console.log(error)
         }
     }
-    */
 
 }
 
