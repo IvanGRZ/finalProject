@@ -2,9 +2,11 @@ import express from "express";
 import session from "express-session";
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
+import httpStatus from 'http-status';
 import md5 from "md5";
 import passport from "passport";
 import { Strategy as LocalStrategy} from 'passport-local'
+import _ from "lodash";
 import router from './src/routes/index.js'
 
 import { AuthDao } from "./src/daos/index.js";
@@ -46,44 +48,32 @@ passport.use('login' ,new LocalStrategy(async (username, password, done) => {
 
 passport.use('signup', new LocalStrategy({ passReqToCallback: true},
     async (req, username, password, done) => {
-    
-    const existUser = await AuthDao.signUp(
-            username, 
-            md5(password), 
-            req.body.address, 
-            req.body.age, 
-            req.body.picture,
-            req.body.name, 
-            req.body.phone,
-        );
-    
-    console.log(existUser)
 
-    if(typeof existUser == 'boolean'){
-        return done(null, false);
-    }
-    else{
-        return done(null, existUser);
-    }
-        //const userData = await userModel.findOne({Email, Password: md5(Password)});
-        /*
-        if(userData){
-            return done(null, false);
+        if (_.isNil(username) || _.isNil(password) || _.isNil(req.body.name)) {
+            return res.status(400).json({
+              success: false,
+              message: `${httpStatus[400]}: Username, password or name missing`,
+            });
         }
-        const stageUser = new userModel({
-            Email,
-            Password: md5(Password),
-            Nombre: req.body.Nombre,
-            Direccion: req.body.Direccion,
-            Edad: req.body.Edad,
-            NumeroTel: req.body.NumeroTel,
-            Foto: req.body.Foto,
-        });
-        const newUser = await stageUser.save();
-        done(null, newUser);
-        */
-    }
-));
+
+        else {
+            const existUser = await AuthDao.signUp(
+                username, 
+                md5(password), 
+                req.body.address, 
+                req.body.age, 
+                req.body.picture,
+                req.body.name, 
+                req.body.phone,
+            );
+            if(typeof existUser == 'boolean'){
+                return done(null, false);
+            }
+            else{
+                return done(null, existUser);
+            }
+        }
+}));
 
 
 

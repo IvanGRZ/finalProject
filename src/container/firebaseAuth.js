@@ -16,12 +16,9 @@ class firebaseAuth {
                 const users = [];
                 let newUser;
 
-                snapshot.forEach(doc => {
-                    users.push(doc.data())
-                })
+                snapshot.forEach(doc => { users.push(doc.data())})
+                let id = Math.max(...users.map(item => item.id))
 
-                let id = data.length;
-                                
                 newUser = {
                     Direccion: direccion,
                     Edad: edad,
@@ -30,74 +27,19 @@ class firebaseAuth {
                     Nombre: nombre,
                     NumeroTel: numero,
                     Password: password,
-                    id: id == 0 ? 0 : id + 1
+                    id: id == '-Infinity' ? 0 : id + 1
                 }
 
-                //const insertUser = await this.collection.doc(id == 0 ? "0" : (id + 1).toString()).set(Newdata[0]);   
-
-                console.log("newuawe", newUser)
-
-
-
-/*
-                const newUser = {
-                    nombre: "Jose",
-                    email: "pedro culito"
-                }
-                return newUser;
-                */
-
+                await this.collection.doc(id == '-Infinity' ? "0" : (id + 1).toString()).set(newUser);
                 return newUser;
             }
             else{
                 return true;
-            }
-
-
-            const snapshot = await this.collection.get();
-            const data = [];
-            const Newdata = [];
-
-            snapshot.forEach(doc => {
-                data.push(doc.data())
-            })
-
-            let id = data.length;                        
-
-            if(id == 0){
-                id = 1
-                Newdata.push({
-                    timestamp: Date.now(),
-                    Products: [{}]
-                })
-            }
-            else{
-                id = id + 1
-                Newdata.push({
-                    timestamp: Date.now(),
-                    Products: [{}]
-                })                
-            }
-
-            const result = await this.collection.doc(id.toString()).set(Newdata[0]);   
-
-            return result;
-            
+            }            
         }
         catch(error){
             console.log(error)
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -121,9 +63,8 @@ class firebaseAuth {
                 }
             }
 
-            
         } catch (error) {
-            
+            console.log(error)
         }        
     }
 

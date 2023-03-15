@@ -12,14 +12,29 @@ const jwtService = new JwtService();
 
 router.post('/auth/signUp', (req, res, next) => {
     passport.authenticate('signup', {session: false}, (err, user, info) => {
-        console.log("Test:",  user);
-        if (err) {
-            console.log("Error1");
-            return next(err);
-        }
-        if (!user) {
-            console.log("Error2");
-            return res.status(401).json({ error: 'Uusario ya registrado!'  });
+        try {
+            if (!user) {
+                return res.status(409).json({
+                    success: false,
+                    message: `${httpStatus[409]}: User already exists`,
+                });
+            }
+            const userDataFormatted = new UserDTO(user).build();
+            const accessToken = jwtService.generateJwt(userDataFormatted);
+        
+            return res.status(200).json({
+              success: true,
+              expiresIn: 60 * 60,
+              accessToken,
+              data: userDataFormatted,
+            });            
+            
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({
+                success: false,
+                message: `${httpStatus[500]}: Internal error`,
+            });            
         }
     })(req, res, next);
 });
@@ -47,7 +62,7 @@ router.post('/auth/signin', (req, res, next) => {
             return res.status(500).json({
                 success: false,
                 message: `${httpStatus[500]}: Internal error`,
-              });           
+            });           
         }
 
     })(req, res, next);
