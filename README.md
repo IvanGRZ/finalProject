@@ -102,6 +102,7 @@ POST
 NodeMailer ENDPOINTS
 
 POST
+
     /api/mail/purchaseEmail
         {
             "username": string,
