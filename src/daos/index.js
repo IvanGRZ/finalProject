@@ -4,12 +4,16 @@ import cartDaofirebase from "./Cart/cartDaofirebase.js";
 import productsDaoArchive from "./Products/productsDaoArchive.js";
 import productsDaofirebase from "./Products/productsDaofirebase.js";
 
+import authDaofirebase from "./Auth/authDaofirebase.js"
+
 
 let ProductDAO = null;
 let CartDAO = null;
+let AuthDao = null;
 let OrderDAO = null;
 
-const type = process.env.PERS || "archive";
+const type = process.env.PERS || "fs";
+
 
 switch (type) {
   case "archive":
@@ -20,7 +24,8 @@ switch (type) {
   case "fs":
     ProductDAO = productsDaofirebase.getInstance();
     CartDAO = cartDaofirebase.getInstance();
+    AuthDao = authDaofirebase.getInstance();
     break;
 }
 
-export { ProductDAO, CartDAO, OrderDAO };
+export { ProductDAO, CartDAO, AuthDao, OrderDAO };

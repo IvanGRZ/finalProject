@@ -75,3 +75,25 @@ DELETE
             {
                 "id": number
             }
+
+
+AUTH ENPOINTS
+
+POST
+    
+    /api/auth/signin
+        {
+            "username": string,
+            "password": "string"
+        }
+
+    /api/auth/signUp
+        {
+            "Email": string,
+            "Password": string,
+            "Nombre": string,
+            "Direccion": string,
+            "Edad": string,
+            "Foto": string
+            "NumeroTel": string
+        }

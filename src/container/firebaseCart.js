@@ -40,14 +40,14 @@ class firebaseCart {
                 id = 1
                 Newdata.push({
                     timestamp: Date.now(),
-                    Products: {}
+                    Products: [{}]
                 })
             }
             else{
                 id = id + 1
                 Newdata.push({
                     timestamp: Date.now(),
-                    Products: {}
+                    Products: [{}]
                 })                
             }
 
@@ -64,45 +64,42 @@ class firebaseCart {
     async addCartproduct(obj){
         try{
             const file = this.collection.doc(obj.cartId.toString());
-            const cart = await file.get();
-            const newData = [];
+            const cart  = await file.get();
+            const Products = [];
+
+            Products.push(cart.data());
 
             if (!cart.exists) {
               console.log('No such document!');
             } else {
-                if(JSON.stringify(cart.data().Products) != '{}'){
-                    
-                    const itemProduct = cart.data().Products.idProducto == obj.productId ;
-        
-                    if(itemProduct){
-                        newData.push({
-                            Products:{
-                                idProducto: obj.productId,
-                                Cantidad: cart.data().Products.Cantidad ? cart.data().Products.Cantidad = parseInt(cart.data().Products.Cantidad) + 1 : cart.data().Products.Cantidad = 2
-                            },
-                            timestamp: new Date()
-                        })                
+                if(JSON.stringify(cart.data().Products.length) != '[{}]'){
+                    const itemProduct = cart.data().Products.find(element => element.idProducto == obj.productId)
+                    if(itemProduct != undefined){
+                        Products[0].Products.forEach(element => {
+                            if (element.idProducto == itemProduct.idProducto){
+                                element.Cantidad = element.Cantidad ? element.Cantidad = parseInt(element.Cantidad) + 1 : 2
+                            }
+                        });
                     }
                     else{
-                        cart._fieldsProto.Products.push({idProducto: obj.productId})
-                        newData.push({
-                            Products: {
-                                idProducto: obj.productId,
-                            },
-                            timestamp:  new Date()
-                        })
+
+                        Products[0].Products.push({ idProducto: obj.productId})
                     }
                 }
                 else{
-                    newData.push({
-                        Products: {
-                            idProducto: obj.productId,
-                        },
-                        timestamp:  new Date()
-                    })            
+                    Products.push(
+                        { 
+                            Products: [
+                                {
+                                    idProducto: obj.productId
+                                }
+                            ], 
+                            timestamp: new Date()
+                        }
+                    )            
                 }
     
-                const addCart = await this.collection.doc(obj.cartId.toString()).update(newData[0]);
+                const addCart = await this.collection.doc(obj.cartId.toString()).update(...Products);
     
                 return addCart;            
             }
@@ -116,37 +113,38 @@ class firebaseCart {
         try{
             const file = this.collection.doc(obj.cartId.toString());
             const cart = await file.get();
-            const newData = []
+            const Products = []
+
+            Products.push(cart.data());
 
             if (!cart.exists) {
                 console.log('No such document!');
               } else {
-                const itemProduct = cart.data().Products.idProducto == obj.productId ;
-                 if(itemProduct){
-                    if(cart.data().Products.Cantidad && cart.data().Products.Cantidad !== 0){
-                        newData.push({
-                            Products:{
-                                idProducto: obj.productId,
-                                Cantidad: cart.data().Products.Cantidad - 1
-                            },
-                            timestamp: new Date()
-                        }) 
-                     }
-                     else{
-                        newData.push({
-                            Products:{},
-                            timestamp: new Date()
-                        })                  
-                    }
+
+                const itemProduct = cart.data().Products.find(element => element.idProducto == obj.productId)
+
+                 if(itemProduct != undefined){
+                    
+                    Products[0].Products.map((element, index) => {
+                        if (element.idProducto == itemProduct.idProducto){
+                            if(element.Cantidad){
+                                element.Cantidad = element.Cantidad - 1
+                                if(element.Cantidad == 0){
+                                    Products[0].Products.splice(index, 1)
+                                }
+                            }
+                            else{
+                                Products[0].Products.splice(index, 1)
+                            }
+                        }
+                    });
                 }
                 else{
                     return {error: "No existe ese producto en este carrito"}
                 }
-
-
               }
 
-              const addCart = await this.collection.doc(obj.cartId.toString()).update(newData[0]);
+              const addCart = await this.collection.doc(obj.cartId.toString()).update(...Products);
     
               return addCart; 
         }
