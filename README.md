@@ -115,3 +115,17 @@ POST
             "username": string,
             "body": "string"
         }
+
+Twilio ENDPOINTS
+
+    /api/messages/sms
+        {
+            "phone": string  
+        }
+
+    /api/messages/whatsapp
+        {
+            "userName": string,
+            "name": string,
+            "body": string
+        }

@@ -32,7 +32,7 @@ router.post('/mail/purchaseEmail', authMiddleware, async (req, res) => {
     }
 });
 
-router.post('/mail/newRegister', authMiddleware, async (req, res) => {
+router.post('/mail/newRegister', async (req, res) => {
     
     const {username, body} = req.body
     const subject = `Nuevo registro de ${username}.`

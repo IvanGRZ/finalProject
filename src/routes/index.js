@@ -4,6 +4,7 @@ import productsRoutes from './products/index.js'
 import cartRoutes from './cart/index.js'
 import authRoutes from './auth/index.js'
 import mailRoutes from './mail/index.js'
+import textMessagesRoutes from './textMessages/index.js'
 
 const router = express.Router();
 
@@ -11,6 +12,7 @@ router.use('/api', productsRoutes);
 router.use('/api', cartRoutes);
 router.use('/api', authRoutes);
 router.use('/api', mailRoutes)
+router.use('/api', textMessagesRoutes)
 
 
 export default router;
