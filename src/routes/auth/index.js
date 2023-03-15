@@ -9,6 +9,13 @@ import JwtService from '../../services/jwt/index.js';
 const router = express.Router();
 const jwtService = new JwtService();
 
+router.get('/auth/test', authMiddleware, (req, res) => {
+    try {
+        res.status(200).json({holas: "hola"});         
+    } catch (error) {
+        console.log(error)
+    }
+});
 
 router.post('/auth/signUp', (req, res, next) => {
     passport.authenticate('signup', {session: false}, (err, user, info) => {
@@ -66,10 +73,6 @@ router.post('/auth/signin', (req, res, next) => {
         }
 
     })(req, res, next);
-});
-
-router.get('/test', authMiddleware, (req, res) => {
-    res.status(200).json(req.user); 
 });
 
 export default router;

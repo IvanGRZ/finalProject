@@ -97,3 +97,20 @@ POST
             "name": string
             "phone": string
         }
+
+
+NodeMailer ENDPOINTS
+
+POST
+    /api/mail/purchaseEmail
+        {
+            "username": string,
+            "name": string,
+            "body": "string"
+        }
+
+    /api/mail/newRegister
+        {
+            "username": string,
+            "body": "string"
+        }

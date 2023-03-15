@@ -1,5 +1,8 @@
 import httpStatus from 'http-status';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const authMiddleware = (req, res, next) => {
 
@@ -13,10 +16,11 @@ const authMiddleware = (req, res, next) => {
             message: `${httpStatus[401]}`
         });
     }
-    const token = authHeader.split(' ')[1];
+    const token = authHeader;
     
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if(err){
+            console.log(err)
             return res.status(403).json({
                 success: false,
                 message: `${httpStatus[403]}: ${err.message}`

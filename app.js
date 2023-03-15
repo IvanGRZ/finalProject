@@ -18,7 +18,6 @@ dotenv.config();
 const app = express();
 const COOKIE_SECRET = process.env.COOKIE_SECRET || 'default';
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(loggerMiddleware);
