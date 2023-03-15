@@ -89,11 +89,11 @@ POST
 
     /api/auth/signUp
         {
-            "Email": string,
-            "Password": string,
-            "Nombre": string,
-            "Direccion": string,
-            "Edad": string,
-            "Foto": string
-            "NumeroTel": string
+            "username": string,
+            "password": string,
+            "address": string,
+            "age": string,
+            "picture": string,
+            "name": string
+            "phone": string
         }
