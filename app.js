@@ -1,6 +1,7 @@
 import express from "express";
 import session from "express-session";
 import dotenv from 'dotenv'
+import cors from 'cors'
 import cookieParser from 'cookie-parser';
 import httpStatus from 'http-status';
 import md5 from "md5";
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(loggerMiddleware);
 app.use(cookieParser(COOKIE_SECRET));
+app.use(cors())
 
 app.use(session({
     secret: COOKIE_SECRET,
