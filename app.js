@@ -1,9 +1,10 @@
 import express from "express";
 import session from "express-session";
-import dotenv from 'dotenv'
 import cors from 'cors'
+import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 import httpStatus from 'http-status';
+import mongooseConnect from './src/config/database/index.js'
 import md5 from "md5";
 import passport from "passport";
 import { Strategy as LocalStrategy} from 'passport-local'
@@ -21,9 +22,9 @@ const COOKIE_SECRET = process.env.COOKIE_SECRET || 'default';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 app.use(loggerMiddleware);
 app.use(cookieParser(COOKIE_SECRET));
-app.use(cors())
 
 app.use(session({
     secret: COOKIE_SECRET,
@@ -35,6 +36,9 @@ app.use(session({
         secure: false
     } 
 }));
+
+mongooseConnect();
+
 
 passport.use('login' ,new LocalStrategy(async (username, password, done) => {
     const user = await AuthDao.login(username, md5(password))

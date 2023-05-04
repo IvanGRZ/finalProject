@@ -1,0 +1,39 @@
+[2023-05-03T21:29:05.155] [ERROR] default - MongoParseError: options usecreateindex, usefindandmodify are not supported
+    at parseOptions (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\connection_string.js:286:15)
+    at new MongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\mongo_client.js:46:63)
+    at _createMongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:851:14)
+    at NativeConnection.openUri (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:705:29)
+    at Mongoose.connect (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\index.js:406:15)
+    at mongooseConnect (file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/src/config/database/index.js:11:24)
+    at file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/app.js:40:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:193:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:530:24) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-05-03T21:29:14.754] [ERROR] default - MongoParseError: options usecreateindex, usefindandmodify are not supported
+    at parseOptions (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\connection_string.js:286:15)
+    at new MongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\mongo_client.js:46:63)
+    at _createMongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:851:14)
+    at NativeConnection.openUri (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:705:29)
+    at Mongoose.connect (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\index.js:406:15)
+    at mongooseConnect (file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/src/config/database/index.js:11:24)
+    at file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/app.js:40:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:193:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:530:24) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-05-03T21:32:20.063] [ERROR] default - MongoParseError: options mongourl, ttl are not supported
+    at parseOptions (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\connection_string.js:286:15)
+    at new MongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\mongo_client.js:46:63)
+    at _createMongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:851:14)
+    at NativeConnection.openUri (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:705:29)
+    at Mongoose.connect (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\index.js:406:15)
+    at mongooseConnect (file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/src/config/database/index.js:11:24)
+    at file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/app.js:40:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:193:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:530:24) {
+  [Symbol(errorLabels)]: Set(0) {}
+}

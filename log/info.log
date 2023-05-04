@@ -380,3 +380,67 @@
 [2023-04-21T20:22:16.867] [INFO] default - 🚀 Server up and running on port 3006
 [2023-04-21T20:23:26.140] [INFO] default - 🚀 Server up and running on port 3006
 [2023-04-21T21:03:58.881] [INFO] default - 🚀 Server up and running on port 3006
+[2023-04-26T20:16:30.512] [INFO] default - firebase persistance selected
+[2023-04-26T20:16:30.517] [INFO] default - 🚀 Server up and running on port 3006
+[2023-04-26T20:17:13.822] [INFO] default - firebase persistance selected
+[2023-04-26T20:17:13.826] [INFO] default - 🚀 Server up and running on port 3006
+[2023-04-26T20:17:29.475] [INFO] default - firebase persistance selected
+[2023-04-26T20:17:29.479] [INFO] default - 🚀 Server up and running on port 3006
+[2023-04-26T20:17:40.277] [INFO] default - firebase persistance selected
+[2023-04-26T20:17:40.281] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:12:33.660] [INFO] default - firebase persistance selected
+[2023-05-03T21:12:33.664] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:12:47.088] [INFO] default - firebase persistance selected
+[2023-05-03T21:12:47.092] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:29:05.155] [ERROR] default - MongoParseError: options usecreateindex, usefindandmodify are not supported
+    at parseOptions (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\connection_string.js:286:15)
+    at new MongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\mongo_client.js:46:63)
+    at _createMongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:851:14)
+    at NativeConnection.openUri (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:705:29)
+    at Mongoose.connect (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\index.js:406:15)
+    at mongooseConnect (file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/src/config/database/index.js:11:24)
+    at file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/app.js:40:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:193:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:530:24) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-05-03T21:29:05.159] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:29:14.754] [ERROR] default - MongoParseError: options usecreateindex, usefindandmodify are not supported
+    at parseOptions (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\connection_string.js:286:15)
+    at new MongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\mongo_client.js:46:63)
+    at _createMongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:851:14)
+    at NativeConnection.openUri (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:705:29)
+    at Mongoose.connect (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\index.js:406:15)
+    at mongooseConnect (file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/src/config/database/index.js:11:24)
+    at file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/app.js:40:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:193:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:530:24) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-05-03T21:29:14.758] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:32:20.063] [ERROR] default - MongoParseError: options mongourl, ttl are not supported
+    at parseOptions (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\connection_string.js:286:15)
+    at new MongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongodb\lib\mongo_client.js:46:63)
+    at _createMongoClient (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:851:14)
+    at NativeConnection.openUri (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\connection.js:705:29)
+    at Mongoose.connect (C:\Users\iguerrero\Desktop\CursoBackEndCoderHouse\Actividades tareas\Projecto final\node_modules\mongoose\lib\index.js:406:15)
+    at mongooseConnect (file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/src/config/database/index.js:11:24)
+    at file:///C:/Users/iguerrero/Desktop/CursoBackEndCoderHouse/Actividades%20tareas/Projecto%20final/app.js:40:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:193:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:530:24) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-05-03T21:32:20.066] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:35:36.523] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:35:36.535] [INFO] default - MONGOOSE CONNECTION OK
+[2023-05-03T21:37:01.784] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:37:01.796] [INFO] default - MONGOOSE CONNECTION OK
+[2023-05-03T21:37:37.680] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:37:37.693] [INFO] default - MONGOOSE CONNECTION OK
+[2023-05-03T21:37:45.114] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:37:45.127] [INFO] default - MONGOOSE CONNECTION OK
+[2023-05-03T21:40:09.808] [INFO] default - 🚀 Server up and running on port 3006
+[2023-05-03T21:40:09.820] [INFO] default - MONGOOSE CONNECTION OK
