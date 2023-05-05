@@ -10,11 +10,11 @@ export const getallOrders = async () => {
     return OrdersModel.find().exec()
 }
 
-export const deleteOrderById = async(id) => {
-    return OrdersModel.findOneAndDelete(id).exec();
+export const deleteOrderById = async(orderNumber) => {
+    return OrdersModel.findOneAndDelete({orderNumber}).exec();
 }
 
-export const getOrderById = async(id) =>{
-    return await OrdersModel.findOne({id}).populate("items.productId");
+export const getOrderById = async(orderNumber) =>{
+    return await OrdersModel.findOne({orderNumber})
 
 }

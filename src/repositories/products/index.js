@@ -6,7 +6,8 @@ export const createProduct = async (product) => {
 }
 
 export const getProductById = async (id) => {
-    return productsModel.findById(id).exec();
+    const product = await productsModel.findOne({id});
+    return product
 }
 
 export const getallProducts = async () => {
@@ -14,13 +15,13 @@ export const getallProducts = async () => {
 }
 
 export const deleteProductById = async(id) => {
-    return productsModel.findOneAndDelete(id).exec();
+    return productsModel.findOneAndDelete({id}).exec();
 }
 
-export const deleteAllProducts = async(id) => {
+export const deleteAllProducts = async() => {
     return productsModel.deleteMany().exec();
 }
 
 export const updateProducts = async(id, obj) => {
-    return productsModel.findByIdAndUpdate(id, obj, {new: true})
+    return productsModel.findByIdAndUpdate({id}, obj, {new: true})
 }

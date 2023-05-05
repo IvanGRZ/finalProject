@@ -4,7 +4,7 @@ class mongoProducts {
 
     async save(obj){
         try{
-            const result = await createProduct(obj)
+            const result = await createProduct(...obj)
                         
             return result;
         }

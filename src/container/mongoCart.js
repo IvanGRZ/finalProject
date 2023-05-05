@@ -25,27 +25,23 @@ class mongoCart {
     }
 
     async addCartproduct(obj){
+
         try {
             // Obtener el carrito del usuario
             const cartId = obj.cartId;
             let cart = await getCart(cartId);
         
             // Verificar si el producto ya existe en el carrito
-            const itemIndex = cart.items.findfindIndex(item => item.idProducto === obj.productId);
+            const itemIndex = cart.products.findIndex(item => item.idProducto === obj.productId);
 
             if (itemIndex === -1) {
-                cart.items.push({ idProducto: newItem.itemId}); // El producto no existe en el carrito, agregarlo con cantidad 1
+                cart.products.push({ idProducto: obj.productId, cantidad: 1}); // El producto no existe en el carrito, agregarlo con cantidad 1
 
             } else { // El producto ya existe en el carrito, aumentar su cantidad
-              cart.items.push(
-                    { 
-                        cantidad:  cart.items[itemIndex].cantidad ? cart.items[itemIndex].cantidad = parseInt(cart.items[itemIndex].cantidad) + 1 : 2
-                    }
-                );
-            }
-        
-            cart = await cart.save();
+                cart.products[itemIndex].cantidad++
 
+            }
+            cart = await cart.save()
             return cart;
         } catch (error) {
             console.log(error);
@@ -56,7 +52,7 @@ class mongoCart {
         try {
           // Buscamos el carrito
           const cartId = obj.cartId;
-          const cart = await getCart(cartId);
+          let cart = await getCart(cartId);
       
           // Si el carrito no existe, lanzamos un error
           if (!cart) {
@@ -64,7 +60,7 @@ class mongoCart {
           }
       
           // Buscamos el producto en el carrito
-          const itemIndex = cart.items.findIndex((item) => item.idProducto === obj.productId);
+          const itemIndex = cart.products.findIndex((item) => item.idProducto === obj.productId);
       
           // Si el producto no existe en el carrito, lanzamos un error
           if (itemIndex === -1) {
@@ -72,12 +68,12 @@ class mongoCart {
           }
       
           // Si el producto tiene una cantidad mayor a 1, reducimos la cantidad
-          if (cart.items[itemIndex].cantidad > 1) {
-            cart.items[itemIndex].cantidad--;
+          if (cart.products[itemIndex].cantidad > 1) {
+            cart.products[itemIndex].cantidad--;
         } 
         else {
             // Si el ítem tiene una cantidad igual o menor a 1, lo eliminamos del carrito
-            cart.items.splice(itemIndex, 1);
+            cart.products.splice(itemIndex, 1);
         }
       
           // Guardamos los cambios en la base de datos

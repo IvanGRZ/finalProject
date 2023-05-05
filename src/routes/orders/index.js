@@ -1,5 +1,4 @@
 import express from "express";
-import * as fs from 'fs';
 import { OrderDAO } from "../../daos/index.js";
 
 const router = express.Router();
@@ -45,3 +44,6 @@ router.delete('/order/delete', (req, res) => {
     })
     .catch(error => res.status(500).json(error))
 });
+
+
+export default router;

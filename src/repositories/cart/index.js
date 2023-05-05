@@ -6,7 +6,7 @@ export const getallCarts = async () => {
 }
 
 export const getCart = async (id) => {
-    return await cartModel.findOne({id}).populate("items.productId");
+    return  await cartModel.findOne({id})
 }
 
 export const createCart = async () => {
@@ -15,5 +15,5 @@ export const createCart = async () => {
 }
 
 export const deleteCartById = async(id) => {
-    return cartModel.findOneAndDelete(id).exec();
+    return cartModel.findOneAndDelete({id}).exec();
 }

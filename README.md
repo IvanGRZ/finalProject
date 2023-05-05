@@ -77,6 +77,42 @@ DELETE
             }
 
 
+Order ENDPOINTS
+
+GET
+
+    /api/order
+
+POST
+
+    /api/order/create
+        {
+            "orderNumber": number,
+            "products": [object],
+            "date": date,
+            "state": "string",
+            "clientEmail": "string"            
+        }
+
+    /api/order/addProduct
+        {
+            "orderId": number,
+            "productId": number
+        }    
+
+DELETE
+
+    /api/order/deleteProduct
+        {
+            "orderId": number,
+            "productId": number
+        }
+
+    /api/order/delete
+        {
+            "orderId": number
+        }
+
 AUTH ENPOINTS
 
 POST

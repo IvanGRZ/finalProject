@@ -34,10 +34,10 @@ class mongoOrder {
         }
     }
     
-    async addProductsOrder(orderId, orderObj){
+    async addProductsOrder(orderObj){
         try {
             // Buscamos la orden
-            const order = await getOrderById(orderId);
+            const order = await getOrderById(orderObj.orderId);
         
             // Si la orden no existe, lanzamos un error
             if (!order) {
@@ -45,24 +45,19 @@ class mongoOrder {
             }
         
             // Buscamos el producto en el carrito
-            const itemIndex = order.items.findIndex((item) => item.idProducto === orderObj.productId);
+            const itemIndex = order.products.findIndex((item) => item.idProducto === orderObj.productId);
         
             // Si el producto no existe en el carrito, lanzamos un error
             if (itemIndex === -1) {
-                order.items.push(
+                order.products.push(
                     {
-                        idProducto: newItem.itemId,
+                        idProducto: orderObj.productId,
                         cantidad: 1
                     }
                 ); // El producto no existe en el carrito, agregarlo con cantidad 1
             }
             else {
-              // Si el ítem tiene una cantidad igual o menor a 1, lo eliminamos del carrito
-              order.items.push(
-                    { 
-                        cantidad:  order.items[itemIndex].cantidad ? order.items[itemIndex].cantidad = parseInt(order.items[itemIndex].cantidad) + 1 : 2
-                    }
-                );            
+                order.products[itemIndex].cantidad++           
             }
         
             // Guardamos los cambios en la base de datos
@@ -75,10 +70,10 @@ class mongoOrder {
         }
     }
 
-    async deleteProductOrder(orderId, productId){
+    async deleteProductOrder(orderObj){
         try {
             // Buscamos la orden
-            const order = await getOrderById(orderId);
+            const order = await getOrderById(orderObj.orderId);
         
             // Si la orden no existe, lanzamos un error
             if (!order) {
@@ -86,7 +81,7 @@ class mongoOrder {
             }
         
             // Buscamos la orden
-            const itemIndex = order.items.findIndex((item) => item.idProducto === productId);
+            const itemIndex = order.products.findIndex((item) => item.idProducto === orderObj.productId);
         
             // Si el producto no existe en la orden, lanzamos un error
             if (itemIndex === -1) {
@@ -94,12 +89,12 @@ class mongoOrder {
             }
         
             // Si el producto tiene una cantidad mayor a 1, reducimos la cantidad
-            if (order.items[itemIndex].cantidad > 1) {
-                order.items[itemIndex].cantidad--;
+            if (order.products[itemIndex].cantidad > 1) {
+                order.products[itemIndex].cantidad--;
           } 
           else {
               // Si el ítem tiene una cantidad igual o menor a 1, lo eliminamos del carrito
-              order.items.splice(itemIndex, 1);
+              order.products.splice(itemIndex, 1);
           }
         
             // Guardamos los cambios en la base de datos
