@@ -26,9 +26,7 @@ class mongoAuth {
     async login(email, password){
 
         const user = await getUserByEmail(email);
-        console.log(user);
-
-
+        
         try {
             if (!user) {
                 return false;
