@@ -1,12 +1,13 @@
 import express from "express";
 import * as fs from 'fs';
 import { CartDAO } from "../../daos/index.js";
+import authMiddleware from "../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 //Cart routes
 
-router.get('/cart', (_req, res) => {
+router.get('/cart', authMiddleware, (_req, res) => {
     CartDAO.getAll()
     .then(result => {
         res.status(200).json({result})
@@ -14,7 +15,7 @@ router.get('/cart', (_req, res) => {
     .catch(error => res.status(500).json(error))
 });
 
-router.post('/cart/create', (_req, res) => {
+router.post('/cart/create',authMiddleware, (_req, res) => {
     CartDAO.createCart()
     .then(result => {
         res.status(200).json({result})
@@ -22,7 +23,7 @@ router.post('/cart/create', (_req, res) => {
     .catch(error => res.status(500).json(error))
 });
 
-router.post('/cart/add', (req, res) => {
+router.post('/cart/add',authMiddleware, (req, res) => {
     CartDAO.addCartproduct(req.body)
     .then(result => {
         res.status(200).json({result})
@@ -30,7 +31,7 @@ router.post('/cart/add', (req, res) => {
     .catch(error => res.status(500).json(error))
 });
 
-router.delete('/cart/deleteProduct', (req, res) => {
+router.delete('/cart/deleteProduct',authMiddleware, (req, res) => {
     CartDAO.delteProduct(req.body)
     .then(result => {
         res.status(200).json({result})
@@ -38,7 +39,7 @@ router.delete('/cart/deleteProduct', (req, res) => {
     .catch(error => res.status(500).json(error))
 });
 
-router.delete('/cart/delete', (req, res) => {
+router.delete('/cart/delete', authMiddleware, (req, res) => {
     CartDAO.delteCart(req.body)
     .then(result => {
         res.status(200).json({result})

@@ -6,9 +6,9 @@ export const createUser = async (userData) => {
 }
 
 export const getUserById = async (id) => {
-    return userModel.findById({id}).exec();
+    return userModel.findById({id});
 }
 
-export const getUserByEmail = async (email) => {
-    return userModel.findOne({email}).exec();
+export const getUserByEmail = async (username) => {
+    return userModel.findOne({username});
 }

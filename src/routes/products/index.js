@@ -1,13 +1,14 @@
 import express from "express";
 import * as fs from 'fs';
 import { ProductDAO } from "../../daos/index.js";
+import authMiddleware from "../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 const admin = true;
 
 //Products routes
 
-router.get('/products', async (_req, res) => {
+router.get('/products',authMiddleware, async (_req, res) => {
     ProductDAO.getAll()
     .then(result => {
         res.status(200).json({result})
@@ -15,7 +16,7 @@ router.get('/products', async (_req, res) => {
     .catch(error => res.status(500).json(error))
 });
 
-router.get('/products/by/id', (req, res) => {
+router.get('/products/by/id',authMiddleware, (req, res) => {
 
     ProductDAO.getByID(req.body.id)
     .then(result => {
@@ -29,7 +30,7 @@ router.get('/products/by/id', (req, res) => {
     .catch(error => res.status(500).json(error))
 });
 
-router.post('/products/add', async (req, res) => {
+router.post('/products/add',authMiddleware, async (req, res) => {
     if(admin){
         ProductDAO.save([req.body])
         .then(result => {
@@ -46,7 +47,7 @@ router.post('/products/add', async (req, res) => {
     }
 });
 
-router.put('/products/update', (req, res) => {
+router.put('/products/update',authMiddleware, (req, res) => {
     if(admin){
         ProductDAO.updateProduct(req.body)
         .then(result => {
@@ -63,7 +64,7 @@ router.put('/products/update', (req, res) => {
     }
 });
 
-router.delete('/products/delete', (req, res) => {
+router.delete('/products/delete', authMiddleware, (req, res) => {
     if(admin){
         ProductDAO.deleteById(req.body.id)
         .then(result => {
